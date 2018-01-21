@@ -2,21 +2,25 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
-$app->get('/hello', function (Request $request, Response $response) {
+$app->get('/books', function (Request $request, Response $response) {
     $this->helper->logger->write();;
 
-    return $response->withJson(ApiResponse::build('Hello World!', 200, 'OK'), 200);
+    // get books here
+    $books = '';
+    return $response->withJson(ApiResponse::build($books, 200, 'OK'), 200);
 
 });
 
-$app->get('/hello/{name}', function (Request $request, Response $response) {
+$app->get('/hello/{id}', function (Request $request, Response $response) {
     $this->helper->logger->write();
-    $name = $request->getAttribute('name');
+    $id = $request->getAttribute('id');
 
-    if ($names == null) {
+    if ($id == null) {
         return $response->withJson(ApiResponse::build('Please specify a name', 400, 'Bad Request'), 400);
     }
 
-    return $response->withJson(ApiResponse::build('Hello ' . (string) $name, 200, 'OK'), 200);
+    // get book here
+    $book = '';
+    return $response->withJson(ApiResponse::build($books, 200, 'OK'), 200);
 
 });
