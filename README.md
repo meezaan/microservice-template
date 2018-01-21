@@ -7,6 +7,7 @@
 # To Do
 
 ```
+Update logs path
 Doctrine ORM example and basic cli commands
 POST, PUT, DELETE and /or PATCH examples and automation
 Feature Toggling / flagging
