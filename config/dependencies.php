@@ -1,6 +1,9 @@
 <?php
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+use Doctrine\ORM\Tools\Setup;
+use Doctrine\ORM\EntityManager;
+use Symfony\Component\Yaml\Yaml;
 
 $container = $app->getContainer();
 
@@ -12,19 +15,30 @@ $container['helper'] = function($c) {
     return $helper;
 };
 
-$container['model'] = function($c) {
-    $model = new \stdClass();
-    $model->one = new ModelOne();
+$container['doctrine'] = function($c) {
+    $doctrine = new \stdClass();
+    $paths = array(realpath(__DIR__) . '/../src');
+    $config = Yaml::parse(file_get_contents(realpath(__DIR__) . '/config.php'));
+    $isDevMode = $config['connections']['database']['doctrine']['mode'] == 'dev' ? true : false;
+    $config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
+    $params = [
+        'driver' => $config['connections']['database']['doctrine']['driver'],
+        'user' => $config['connections']['database']['doctrine']['username'],
+        'password' => $config['connections']['database']['doctrine']['password'],
+        'dbname' => $config['connections']['database']['doctrine']['dbname'],
+        'host' => $config['connections']['database']['doctrine']['host'],
+        'port' => ,$config['connections']['database']['doctrine']['port']
+    ];
 
-    return $model;
+    $doctrine->entityManager = EntityManager::create($params, $config);
+
+    return $doctrine;
+
 };
 
-$container['entity'] = function($c) {
-    $entity = new \stdClass();
-    $entity->one = new EntityOne();
-
-    return $entity;
-};
+$container['config'] = function($c) {
+    return Yaml::parse(file_get_contents(realpath(__DIR__) . '/config.php'));
+}
 
 $container['notFoundHandler'] = function ($c) {
     return function ($request, $response) use ($c) {

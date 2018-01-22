@@ -1,5 +1,5 @@
 <?php
-use AlAdhanApi\Helper\Config;
+use \Helper\Config;
 
 class ConfigTest extends \PHPUnit\Framework\TestCase
 {

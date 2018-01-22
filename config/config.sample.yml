@@ -1,10 +1,13 @@
 connections:
     database:
-        host: 123.45.67.89
-        username: username
-        password: password
-        dbname: databasename
-        port: 3306
+        doctrine:
+            host: 123.45.67.89
+            username: username
+            password: password
+            dbname: databasename
+            port: 3306
+            mode: dev # dev or prod
+            driver: pdo_mysql
     memcache:
         host: 123.56.89.00
         port: 12345
