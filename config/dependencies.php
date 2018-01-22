@@ -7,7 +7,7 @@ $container = $app->getContainer();
 $container['helper'] = function($c) {
     $helper = new \stdClass();
     $helper->logger = new Logger('MicroService');
-    $helper->logger->pushHandler(new StreamHandler('/path/to/logs', Logger::WARNING));
+    $helper->logger->pushHandler(new StreamHandler(realpath(realpath(__DIR__) . '/../logs') . '/microservice.log', Logger::WARNING));
 
     return $helper;
 };
