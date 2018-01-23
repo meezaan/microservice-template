@@ -27,7 +27,7 @@ $container['doctrine'] = function($c) {
         'password' => $config['connections']['database']['doctrine']['password'],
         'dbname' => $config['connections']['database']['doctrine']['dbname'],
         'host' => $config['connections']['database']['doctrine']['host'],
-        'port' => ,$config['connections']['database']['doctrine']['port']
+        'port' => $config['connections']['database']['doctrine']['port']
     ];
 
     $doctrine->entityManager = EntityManager::create($params, $config);

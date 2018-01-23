@@ -18,8 +18,7 @@
     "tuupola/slim-jwt-auth": "^2.2",
     "tuupola/slim-basic-auth": "^2.2",
     "slim/http-cache": "0.4.0",
-    "meezaan/microservice-helper":"dev-master",
-    "symfony/yaml": "^3.3"
+    "meezaan/microservice-helper":"dev-master"
   },
   "autoload": {
     "psr-0": {
