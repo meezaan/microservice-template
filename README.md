@@ -11,15 +11,14 @@ Doctrine ORM example and basic cli commands
 POST, PUT, DELETE and /or PATCH examples and automation
 Feature Toggling / flagging
 Links to included composer packages for help and documentation
-Move dependencies into a yml file too as needed and add config files for multiple environments - env handling
 Add API Docs
 Add PHP Docs
 ```
 ## Doctrine
-Generate Entities (getters and setters) ``` php vendor/bin/doctrine orm:generate-entities```
+Generate Entities (getters and setters) ``` php vendor/bin/doctrine orm:generate-entities src/```
 
 Generate Proxies ``` php vendor/bin/doctrine orm:generate-proxies ```
 
 Update ``` php vendor/bin/doctrine orm:schema-tool:update```
 
-Create ``` php vendor/bin/doctrine orm:schema-tool:creare```
+Create ``` php vendor/bin/doctrine orm:schema-tool:create```

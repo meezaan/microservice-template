@@ -7,21 +7,26 @@ use Symfony\Component\Yaml\Yaml;
 
 $container = $app->getContainer();
 
+$container['config'] = function($c) {
+    return Yaml::parse(file_get_contents(realpath(__DIR__) . '/config.yml'));
+};
+
 $container['helper'] = function($c) {
+    $config = $c->config; 
     $helper = new \stdClass();
     $helper->logger = new Logger('MicroService');
     $helper->logger->pushHandler(new StreamHandler(realpath(realpath(__DIR__) . '/../logs') . '/microservice.log', Logger::WARNING));
-
+$helper->config= $config;
     return $helper;
 };
 
 $container['doctrine'] = function($c) {
+    $config = $c->config; 
     $doctrine = new \stdClass();
     $paths = array(realpath(__DIR__) . '/../src');
-    $config = Yaml::parse(file_get_contents(realpath(__DIR__) . '/config.php'));
     $isDevMode = $config['connections']['database']['doctrine']['mode'] == 'dev' ? true : false;
-    $config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
-    $params = [
+    $docConfig = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
+    $docParams = [
         'driver' => $config['connections']['database']['doctrine']['driver'],
         'user' => $config['connections']['database']['doctrine']['username'],
         'password' => $config['connections']['database']['doctrine']['password'],
@@ -30,15 +35,11 @@ $container['doctrine'] = function($c) {
         'port' => $config['connections']['database']['doctrine']['port']
     ];
 
-    $doctrine->entityManager = EntityManager::create($params, $config);
-
+    $doctrine->entityManager = EntityManager::create($docParams, $docConfig);
+    
     return $doctrine;
 
 };
-
-$container['config'] = function($c) {
-    return Yaml::parse(file_get_contents(realpath(__DIR__) . '/config.php'));
-}
 
 $container['notFoundHandler'] = function ($c) {
     return function ($request, $response) use ($c) {
