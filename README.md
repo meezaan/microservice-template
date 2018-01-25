@@ -7,8 +7,6 @@
 # To Do
 
 ```
-Doctrine ORM example and basic cli commands
-POST, PUT, DELETE and /or PATCH examples and automation
 Feature Toggling / flagging
 Links to included composer packages for help and documentation
 Add API Docs
