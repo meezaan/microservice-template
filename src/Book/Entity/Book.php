@@ -1,8 +1,5 @@
 <?php
-// entity/Ayat.php
-
 namespace Book\Entity;
-
 
 /**
  * @Entity @Table(name="book", indexes={@Index(name="book_idx", columns={"id"}), @Index(name="name_x", columns={"name"})})
