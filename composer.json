@@ -13,7 +13,7 @@
     "doctrine/dbal": "v2.5.4",
     "doctrine/orm": "v2.5.4",
     "guzzlehttp/guzzle": "^6.1",
-    "slim/slim": "^3.0",
+    "slim/slim": "^3.9",
     "symfony/yaml": "^3.3",
     "tuupola/slim-jwt-auth": "^2.2",
     "tuupola/slim-basic-auth": "^2.2",
@@ -32,6 +32,8 @@
     "behat/behat": "^3.4",
     "behat/mink-extension": "^2.3",
     "behat/mink-goutte-driver": "^1.2",
+    "apigen/apigen": "dev-master",
+    "roave/better-reflection": "dev-master#c87d856",
     "behat/mink-selenium2-driver": "^1.3"
   }
 }
