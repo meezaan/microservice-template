@@ -76,6 +76,4 @@ apidoc -i routes/ -o docs/api/
 
 ```
 Feature Toggling / flagging
-Add API Docs
-Add PHP Docs
 ```
