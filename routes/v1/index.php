@@ -11,7 +11,7 @@ $app->group('/v1', function() {
     * @apiDescription  Returns all available books.
     * @apiName GetBooks
     * @apiGroup Book
-    * @apiVersion 1.0
+    * @apiVersion 1.0.0
     *
     * @apiExample {http} Example usage:
     *   http://example.com/v1/books
@@ -21,28 +21,32 @@ $app->group('/v1', function() {
     * {
     *     "code": 200,
     *     "status": "OK",
-    *     "data": {
-    *         "MWL": {
-    *             "id": 3,
-    *             "name": "Muslim World League",
-    *             "params": {
-    *                 "Fajr": 18,
-    *                 "Isha": 17
-    *             }
+    *     "data": [
+    *         {
+    *             "id": 1,
+    *             "pages": 374,
+    *             "chapters": 12,
+    *             "name": "Living Sufism"
     *         },
-    *         "ISNA": {
+    *         {
     *             "id": 2,
-    *             "name": "Islamic Society of North America (ISNA)",
-    *             "params": {
-    *                 "Fajr": 15,
-    *                 "Isha": 15
-    *             }
+    *             "pages": 374,
+    *             "chapters": 12,
+    *             "name": "Living Sufism"
     *         },
-    *         .... More methods
-    *         "CUSTOM": {
-    *             "id": 99
+    *         {
+    *             "id": 3,
+    *             "pages": 374,
+    *             "chapters": 12,
+    *             "name": "Knowledge and the Sacred"
+    *         },
+    *         {
+    *             "id": 4,
+    *             "pages": 374,
+    *             "chapters": 12,
+    *             "name": "The Alchemy of Happiness"
     *         }
-    *     }
+    *     ]
     * }
     *
     **/

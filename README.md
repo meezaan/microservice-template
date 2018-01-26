@@ -54,7 +54,23 @@ vendor/bin/phpcbf src/
 ```
 
 ## Generate PHP docs
-vendor/bin/apigen generate src/ --destination docs
+```
+vendor/bin/apigen generate src/ --destination docs/php
+```
+
+## ApiDocJS API Documentation
+This requires ```npm```. To install:
+
+```
+npm install apidoc -g
+```
+
+To run:
+```
+apidoc -i routes/ -o docs/api/
+```
+
+
 
 # To Do
 
