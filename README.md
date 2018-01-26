@@ -10,7 +10,7 @@
 
 Run:
 ```
-composer create project meezaan/microservice-template project-name
+composer create-project meezaan/microservice-template project-name
 ```
 
 Now Run the doctrine generate entities and create schema commands shown below. Point an Apache / nginx at the www/index.php file, and you have a running microservice. Tweak stuff in src/ to your heart's content to build a new microservice.
