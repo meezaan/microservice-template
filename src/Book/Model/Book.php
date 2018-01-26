@@ -11,18 +11,21 @@ class Book
 {
     /**
      * [private description]
+     *
      * @var [type]
      */
     private $entityBuilder;
 
     /**
      * [private description]
+     *
      * @var [type]
      */
     private $entityManager;
 
     /**
      * [private description]
+     *
      * @var [type]
      */
     private $errors;
@@ -30,6 +33,7 @@ class Book
 
     /**
      * [__construct description]
+     *
      * @param DoctrineORMEntityManager $entityManager [description]
      */
     public function __construct(\Doctrine\ORM\EntityManager $entityManager)
@@ -40,6 +44,7 @@ class Book
 
     /**
      * [post description]
+     *
      * @param  [type] $data [description]
      * @return [type]       [description]
      */
@@ -58,6 +63,7 @@ class Book
 
     /**
      * [validate description]
+     *
      * @param  [type] $data [description]
      * @return [type]       [description]
      */
@@ -68,6 +74,7 @@ class Book
 
     /**
      * [put description]
+     *
      * @param  [type] $data [description]
      * @param  [type] $id   [description]
      * @return [type]       [description]
@@ -96,6 +103,7 @@ class Book
 
     /**
      * [get description]
+     *
      * @param  [type] $id [description]
      * @return [type]     [description]
      */
@@ -125,6 +133,7 @@ class Book
 
     /**
      * [getErrors description]
+     *
      * @return [type] [description]
      */
     public function getErrors()
