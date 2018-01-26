@@ -1,0 +1,11 @@
+# behat.yml
+default:
+    autoload:
+        '': %paths.base%/tests/Features/bootstrap
+    suites:
+        default:
+            paths: %paths.base%/tests/Features
+    extensions:
+        Behat\MinkExtension:
+            goutte: ~
+            selenium2: ~

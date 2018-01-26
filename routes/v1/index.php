@@ -5,12 +5,54 @@ use \Meezaan\MicroServiceHelper\Response as ApiResponse;
 use Book\Model\Book;
 
 $app->group('/v1', function() {
+
+  /**
+    * @api {get} /v1/books List all books
+    * @apiDescription  Returns all available books.
+    * @apiName GetBooks
+    * @apiGroup Book
+    * @apiVersion 1.0
+    *
+    * @apiExample {http} Example usage:
+    *   http://example.com/v1/books
+    *
+    * @apiSuccessExample Success-Response:
+    * HTTP/1.1 200 OK
+    * {
+    *     "code": 200,
+    *     "status": "OK",
+    *     "data": {
+    *         "MWL": {
+    *             "id": 3,
+    *             "name": "Muslim World League",
+    *             "params": {
+    *                 "Fajr": 18,
+    *                 "Isha": 17
+    *             }
+    *         },
+    *         "ISNA": {
+    *             "id": 2,
+    *             "name": "Islamic Society of North America (ISNA)",
+    *             "params": {
+    *                 "Fajr": 15,
+    *                 "Isha": 15
+    *             }
+    *         },
+    *         .... More methods
+    *         "CUSTOM": {
+    *             "id": 99
+    *         }
+    *     }
+    * }
+    *
+    **/
     $this->get('/books', function (Request $request, Response $response) {
         $this->helper->logger->info('v1/books');
-        // get books here
-        $books = '';
 
-        return $response->withJson(ApiResponse::build($books, 200, 'OK'), 200);
+        $book = new Book($this->doctrine->entityManager);
+        $result = $book->get();
+
+        return $response->withJson(ApiResponse::build($result, 200, 'OK'), 200);
 
     });
 
@@ -29,12 +71,12 @@ $app->group('/v1', function() {
         }
 
         return $response->withJson(ApiResponse::build('Sorry, this book does not exist', 404), 404);
-    
+
     });
 
 
     $this->post('/books', function (Request $request, Response $response) {
-        $json = (string)$request->getBody();    
+        $json = (string)$request->getBody();
         $postedBodyArray = json_decode($json, true);
         $book = new Book($this->doctrine->entityManager);
         $bookId = $book->post($postedBodyArray);
@@ -46,14 +88,14 @@ $app->group('/v1', function() {
 
         return $response->withJson(ApiResponse::build($book->getErrors(), 400), 400);
     });
-    
+
     $this->put('/books/{id}', function (Request $request, Response $response) {
         $id = $request->getAttribute('id');
         if ($id == 0  || $id == null || $id == '' || !is_numeric($id)) {
             return $response->withJson(ApiResponse::build('Please specify a valid resource', 400), 400);
         }
 
-        $json = (string)$request->getBody();    
+        $json = (string)$request->getBody();
         $postedBodyArray = json_decode($json, true);
         $book = new Book($this->doctrine->entityManager);
         $bookId = $book->put($postedBodyArray, $id);

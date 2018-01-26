@@ -13,7 +13,9 @@ $routes = array_keys(array_filter(iterator_to_array($iterator), function($file) 
 }));
 
 foreach ($routes as $route) {
-    require_once(realpath($route));
+    if (strpos($route, '.php') !== false) {
+        require_once(realpath($route));
+    }
 }
 /***/
 

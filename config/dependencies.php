@@ -57,7 +57,7 @@ $container['notFoundHandler'] = function ($c) {
     };
 };
 
-$container['errorHandler'] = function ($c) {
+/*$container['errorHandler'] = function ($c) {
     return function ($request, $response) use ($c) {
         $r = [
         'code' => 500,
@@ -72,4 +72,4 @@ $container['errorHandler'] = function ($c) {
             ->withHeader('Content-Type', 'application/json')
             ->write($resp);
     };
-};
+};*/
