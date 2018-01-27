@@ -11,8 +11,8 @@
   "require": {
     "php": ">=7.1",
     "monolog/monolog": "~1.17",
-    "doctrine/dbal": "v2.5.4",
-    "doctrine/orm": "v2.5.4",
+    "doctrine/dbal": "v2.5.13",
+    "doctrine/orm": "v2.5.14",
     "guzzlehttp/guzzle": "^6.1",
     "slim/slim": "^3.9",
     "symfony/yaml": "^3.3",
