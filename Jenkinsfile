@@ -62,7 +62,7 @@ node('php') {
     
     stage('Generate API documentation') {
         // Requires node js - npm install apidocjs
-        sh 'vendor/bin/apigen generate src/ --destination build/docs/api'
+        sh 'apidoc -i routes/ -o docs/api/'
     }
     stage('Make Production Ready') {
         sh 'composer install --no-dev'
