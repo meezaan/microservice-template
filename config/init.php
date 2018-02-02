@@ -1,4 +1,5 @@
 <?php
+use Symfony\Component\Yaml\Yaml;
 /** PHP Error handling **/
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -6,9 +7,10 @@ ini_set('display_errors', 1);
 
 /** Autoloader **/
 require_once realpath(__DIR__) . '/../vendor/autoload.php';
+require_once(realpath(__DIR__) . '/environment.php');
 
 /** Load Config File **/
-$config = Symfony\Component\Yaml\Yaml::parse(file_get_contents(realpath(__DIR__) . '/config.yml'));
+$config = Yaml::parse(file_get_contents(realpath(__DIR__) . '/config.' . $provisionContext . '.yml'));
 
 /** Settings **/
 $settings = [

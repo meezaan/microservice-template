@@ -8,7 +8,8 @@ use Symfony\Component\Yaml\Yaml;
 $container = $app->getContainer();
 
 $container['config'] = function($c) {
-    return Yaml::parse(file_get_contents(realpath(__DIR__) . '/config.yml'));
+    $environment = in_array(getenv('PROVISION_CONTEXT'), ['development', 'production', 'staging']) ? getenv('PROVISION_CONTEXT') : 'development';
+    return Yaml::parse(file_get_contents(realpath(__DIR__) . '/config.' . $environment . '.yml'));
 };
 
 $container['helper'] = function($c) {

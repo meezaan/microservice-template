@@ -1,13 +1,11 @@
 connections:
     database:
         doctrine:
-            #host: mysql
-            host: 0.0.0.0
+            host: mysql
             username: dev
             password: dev
             dbname: database
-            #port: 3306
-            port: 13306
+            port: 3306
             mode: dev # dev or prod
             driver: pdo_mysql
     memcache:

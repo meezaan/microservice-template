@@ -53,7 +53,8 @@ class BaseTestCase extends \PHPUnit\Framework\TestCase
         $response = new Response();
 
         // Use the application settings
-        $config = Yaml::parse(file_get_contents(realpath(__DIR__) . '/../../config/config.yml'));
+        require_once realpath(__DIR__) . '/../../config/environment.php';
+        $config = Yaml::parse(file_get_contents(realpath(__DIR__) . '/../../config/config.' . $provisionContext. '.yml'));
 
         $settings = [
             'settings' => [
