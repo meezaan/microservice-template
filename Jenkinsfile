@@ -58,7 +58,7 @@ node('php') {
     
     stage('Generate API documentation') {
         // Requires node js - npm install apidocjs
-        sh 'apidoc -i routes/ -o docs/api/'
+        sh 'apidoc -i routes/ -o build/docs/api/'
     }
     stage('Make Production Ready') {
         sh 'composer install --no-dev'
