@@ -52,12 +52,8 @@ node('php') {
         sh 'vendor/bin/phploc --count-tests --exclude vendor/ --log-csv build/logs/phploc.csv --log-xml build/logs/phploc.xml app'
     }
 
-    stage('Software metrics') {
-        sh 'vendor/bin/pdepend --jdepend-xml=build/logs/jdepend.xml --jdepend-chart=build/pdepend/dependencies.svg --overview-pyramid=build/pdepend/overview-pyramid.svg --ignore=vendor app'
-    }
-
     stage('Generate PHP documentation') {
-        sh 'vendor/bin/apigen generate src/ --destination build/docs/php'
+        sh 'vendor/bin/phpdox'
     }
     
     stage('Generate API documentation') {
