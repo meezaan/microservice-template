@@ -13,7 +13,9 @@ jobs:
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mysql:9.4
-
+      - run:
+         name: Install PHP ext-xsl
+         command: sudo apt-get install -y php7.1-xsl
     working_directory: ~/repo
 
     steps:
