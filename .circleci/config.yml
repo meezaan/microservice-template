@@ -18,8 +18,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install PHP libzip-dev
-          command: sudo apt-get install -y php7.0-xml
+          name: Install PHP php-xsl
+          command: sudo apt-get install -y php7.1-xml
 
       # Download and cache dependencies
       - restore_cache:
