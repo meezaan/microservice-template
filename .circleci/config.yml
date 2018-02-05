@@ -19,7 +19,7 @@ jobs:
       - checkout
       - run:
           name: Install PHP php-xsl
-          command: sudo apt-get update && apt-get install -y php7.0-xml
+          command: sudo apt-get install php-xml
 
       # Download and cache dependencies
       - restore_cache:
