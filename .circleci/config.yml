@@ -13,8 +13,6 @@ jobs:
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
         - image: meezaan/perconadb5.7
-    run: | 
-            docker run -d -h mysql --name mysql meezaan/perconadb5.7
     working_directory: /app
 
     steps:

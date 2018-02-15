@@ -1,7 +1,8 @@
 connections:
     database:
         doctrine:
-            host: mysql
+            #host: mysql
+            host: localhost
             username: dev
             password: dev
             dbname: database
