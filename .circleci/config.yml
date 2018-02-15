@@ -18,8 +18,7 @@ jobs:
     steps:
       - run: cd /
       - run: rm -rf /app
-      - run: git clone https://github.com/meezaan/microservice-template.git app
-      - run: cd app
+      - run: cd ../ && git clone https://github.com/meezaan/microservice-template.git app
       - run: ls -al
       - run: pwd 
       - run: composer install -n --prefer-dist
