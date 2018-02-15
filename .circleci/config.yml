@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-        - image: circleci/php:7.1.14-apache-node-browsers
+        - image: mattrayner/lamp:latest-1604
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -17,9 +17,6 @@ jobs:
 
     steps:
       - checkout
-      - run:
-          name: Install PHP php-xsl
-          command: sudo apt-get install php-xml
 
       # Download and cache dependencies
       - restore_cache:
