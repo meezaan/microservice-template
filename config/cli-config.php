@@ -18,7 +18,7 @@ $dbParams = [
     'host' => $config['connections']['database']['doctrine']['host'],
     'port' => $config['connections']['database']['doctrine']['port']
 ];
-var_dump($dbParams);exit;
+
 $entityManager = EntityManager::create($dbParams, $dbConfig);
 
 return ConsoleRunner::createHelperSet($entityManager);

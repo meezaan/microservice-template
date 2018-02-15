@@ -20,6 +20,7 @@ jobs:
       - run: rm -rf /app
       - run: cd ../ && git clone https://github.com/meezaan/microservice-template.git app
       - run: composer install -n --prefer-dist
+      - run: mysql -udev -pdev -h localhost
       - run: vendor/bin/doctrine orm:schema-tool:create
 
       # run and build tests!
