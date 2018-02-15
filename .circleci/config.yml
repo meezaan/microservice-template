@@ -16,7 +16,7 @@ jobs:
     working_directory: /app
 
     steps:
-      -run: cd /
+      - run: cd /
       - run: rm -rf /app
       - run: git clone https://github.com/meezaan/microservice-template.git app
       - run: cd app
