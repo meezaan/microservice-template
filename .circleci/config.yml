@@ -8,7 +8,7 @@ jobs:
     docker:
       # specify the version you desire here
         - image: meezaan/php-apache-7.1
-      
+
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
@@ -20,7 +20,7 @@ jobs:
       - run: rm -rf /app
       - run: cd ../ && git clone https://github.com/meezaan/microservice-template.git app
       - run: composer install -n --prefer-dist
-      - run: apt-get install mysql
+      - run: apt-get install mysql-client
       - run: mysql -udev -pdev -h localhost
       - run: vendor/bin/doctrine orm:schema-tool:create
 
