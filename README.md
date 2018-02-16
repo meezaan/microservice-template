@@ -11,9 +11,21 @@ This is PHP 7 based microservice template that can greatly speed up building of 
 * Slim Framework v3
 
 # How to use it
+This is effectively a starter template. You can make changes in the src and the routes folder and have you microservice up and running in a few minutes (depending on what you're trying to do, of course).
 
 ## Understanding the Structure
 
+The template uses a variety of composer packages. The list is available in composer.json. Many of these are optional - look in src/Model to see which ones may be used.
+
+### The src Folder
+This starts with namespace definition. The example has a namespace called Book. Inside our namespace, we have:
+
+1. Entities - These are Doctrine entities - we're using Doctrine as an ORM here - so you can create and manage your schema with these.
+2. Models - These contain any business logic you need to apply incoming our outgoing data.
+3. Helpers - Any generic classes to help you do stuff can go here - if you're not using any third party composer packages.
+
+### The routes folder
+This contains your microservice routes. It comes with versioned folders and the file within is self explanatory. We don't have controllers on purpose - they make you think like a monolith. A routes file will likely force you into a microservice mindset.
 
 ## Create a Project with this template
 
@@ -22,6 +34,7 @@ Run:
 composer create-project --stability dev meezaan/microservice-template project-name
 ```
 
+# Other stuff - the stuff below needs to be written properly.
 
 ## Run Doctrine to create your shema
 
