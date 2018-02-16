@@ -117,6 +117,7 @@ apidoc -i routes/ -o docs/api/
 
 
 # To Do
+Add docs about artifacts produced.
 
 ```
 Feature Toggling / flagging
