@@ -9,8 +9,8 @@ connections:
             mode: dev # dev or prod
             driver: pdo_mysql
     memcache:
-        host: 123.56.89.00
-        port: 12345
+        host: localhost 
+        port: 11211
 
 slim:
     settings:

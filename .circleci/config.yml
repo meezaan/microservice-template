@@ -8,11 +8,10 @@ jobs:
     docker:
       # specify the version you desire here
         - image: meezaan/php-apache-7.1
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # Percona DB container 
         - image: meezaan/perconadb5.7
+      # Memcached container
+        -image: memcached
     working_directory: /app
 
     # Setup Service and Create Database
