@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/meezaan/microservice-template.svg?style=svg)](https://circleci.com/gh/meezaan/microservice-template)
+
 # Introduction
 This is PHP 7 based microservice template that can greatly speed up building of microservices.
 
