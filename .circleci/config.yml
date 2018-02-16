@@ -11,7 +11,7 @@ jobs:
       # Percona DB container 
         - image: meezaan/perconadb5.7
       # Memcached container
-        -image: memcached
+        - image: memcached
     working_directory: /app
 
     # Setup Service and Create Database
