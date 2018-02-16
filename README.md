@@ -1,3 +1,5 @@
+# Introduction
+This is PHP 7 based microservice template that can greatly speed up building of microservices.
 
 # Technology Stack
 
@@ -6,12 +8,23 @@
 * Memcached
 * Slim Framework v3
 
-# Create a Project with this template
+# How to use it
+
+## Understanding the Structure
+
+
+## Create a Project with this template
 
 Run:
 ```
 composer create-project --stability dev meezaan/microservice-template project-name
 ```
+
+
+## Run Doctrine to create your shema
+
+This sample microservice contains a simple book microservice with one tab
+
 
 Now Run the doctrine generate entities and create schema commands shown below. Point an Apache / nginx at the www/index.php file, and you have a running microservice. Tweak stuff in src/ to your heart's content to build a new microservice.
 

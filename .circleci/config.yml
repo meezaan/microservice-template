@@ -15,17 +15,23 @@ jobs:
         - image: meezaan/perconadb5.7
     working_directory: /app
 
+    # Setup Service and Create Database
     steps:
       - run: cd /
       - run: rm -rf /app
       - run: cd ../ && git clone https://github.com/meezaan/microservice-template.git app
       - run: composer install -n --prefer-dist
+      - run: mv config/config.circleci.yml config/config.development.yml
       - run: vendor/bin/doctrine orm:schema-tool:create
 
-      # run and build tests!
+      # Run and Build tests!
       - run: vendor/bin/phpunit tests/
         # - run: vendor/bin/phpcs --report=checkstyle --report-file=build/logs/checkstyle.xml --standard=PSR2 src/
-        #- run: vendor/bin/phpmd src/ html cleancode,codesize,controversial,design,unusedcode --reportfile build/logs/pmd.html
-        #- run: vendor/bin/phpcpd --log-pmd build/logs/pmd-cpd.xml src/
+      - run: vendor/bin/phpmd src/ html cleancode,codesize,controversial,design,unusedcode --reportfile build/logs/pmd.html
+      - run: vendor/bin/phpcpd --log-pmd build/logs/pmd-cpd.xml src/
       - run: vendor/bin/phploc src/ > build/logs/phploc.html
       - run: vendor/bin/phpdox
+      
+      # Store Artifacts
+      - store_artifacts:
+          path: /app/build
