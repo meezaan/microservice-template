@@ -11,7 +11,7 @@ This is PHP 7 based microservice template that can greatly speed up building of 
 * Slim Framework v3
 
 # How to use it
-This is effectively a starter template. You can make changes in the src and the routes folder and have you microservice up and running in a few minutes (depending on what you're trying to do, of course).
+This is effectively a starter template. You can make changes in the src and the routes folder and have your microservice up and running in a few minutes (depending on what you're trying to do, of course).
 
 ## Understanding the Structure
 
@@ -34,18 +34,10 @@ Run:
 composer create-project --stability dev meezaan/microservice-template project-name
 ```
 
-# Other stuff - the stuff below needs to be written properly.
-
-## Run Doctrine to create your shema
-
-This sample microservice contains a simple book microservice with one tab
+# Other stuff - the below documentation is not yet complete. Stay tuned.
 
 
-Now Run the doctrine generate entities and create schema commands shown below. Point an Apache / nginx at the www/index.php file, and you have a running microservice. Tweak stuff in src/ to your heart's content to build a new microservice.
-
-See composer.json to add / remove packages as you need them.
-
-This template comes packaged with several different tools (via composer). Using all of them is optiona. You can choose to use them or remove them as you wish. You can even add your own. Below are some useful commands and links to documentation for the tools used:
+This template comes packaged with several different tools (via composer). Using all of them is optional. You can choose to use them or remove them as you wish. You can even add your own. Below are some useful commands and links to documentation for the tools used:
 
 * Doctrine (ORM and DBAL) - http://www.doctrine-project.org/projects/orm.html
 * ApiGen (PHP Documentation) - https://github.com/ApiGen/ApiGen
@@ -60,6 +52,7 @@ This template comes packaged with several different tools (via composer). Using 
 * Slim Validation
 * ApiDocJS - A Javascript / nodejs based tool to generate pretty API Documentation - http://apidocjs.com/
 
+See composer.json to add / remove packages as you need them.
 
 ## Doctrine
 Generate Entities (getters and setters) ``` vendor/bin/doctrine orm:generate-entities src/```
