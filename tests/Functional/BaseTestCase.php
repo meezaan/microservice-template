@@ -45,7 +45,7 @@ class BaseTestCase extends \PHPUnit\Framework\TestCase
         $request = Request::createFromEnvironment($environment);
 
         // Add request data, if it exists
-        if (isset($requestData)) {
+        if (null !== $requestData) {
             $request = $request->withParsedBody($requestData);
         }
 
@@ -54,7 +54,9 @@ class BaseTestCase extends \PHPUnit\Framework\TestCase
 
         // Use the application settings
         require_once realpath(__DIR__) . '/../../config/environment.php';
-        $config = Yaml::parse(file_get_contents(realpath(__DIR__) . '/../../config/config.' . $provisionContext. '.yml'));
+        $config = Yaml::parse(
+            file_get_contents(realpath(__DIR__) . '/../../config/config.' . $provisionContext. '.yml')
+        );
 
         $settings = [
             'settings' => [
@@ -81,12 +83,13 @@ class BaseTestCase extends \PHPUnit\Framework\TestCase
 
         foreach ($routes as $route) {
             if (strpos($route, '.php') !== false) {
-                require_once(realpath($route));
+                require_once realpath($route);
             }
         }
         /***/
 
         // Process the application
+        /** @var \Slim\Http\Response $response */
         $response = $app->process($request, $response);
 
         // Return the response

@@ -1,0 +1,41 @@
+{% extends '/layouts/master.twig' %}
+
+{% block hero %}
+    <div id="home-page" class="span12 span-wrap sections-container">
+        {% include '/home/partials/sections/top_section.twig' %}
+    </div>
+{% endblock %}
+
+{% block content %}
+    {% if device.isApple %}
+        {# Secondary banner#}
+        {% include '/home/partials/banners/secondary.twig' %}
+        {% include '/home/partials/banners/primary.twig' %}
+    {% else %}
+        {# Primary banner#}
+        {% include '/home/partials/banners/primary.twig' %}
+        {% include '/home/partials/banners/secondary.twig' %}
+    {% endif %}
+
+    {% if flags.money_banner %}
+        <div id="money-section" class="section section-gameplan section-gameplan--yellow">
+            {% include '/home/partials/sections/money.twig' %}
+        </div>
+    {% else %}
+        <div id="loans-section" class="section section-loans">
+            <div class="body">
+                {% include '/home/partials/sections/loans.twig' %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% if flags.dashboard_light %}
+        <div id="goodybags-section" class="section cream-pattern goodybags-section">
+            <div class="body">
+                {% include '/home/partials/sections/hero_goodybag.twig' %}
+            </div>
+        </div>
+    {% endif %}
+
+
+{% endblock %}

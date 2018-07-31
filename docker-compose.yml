@@ -1,0 +1,28 @@
+###############################################################################
+#                          Generated on phpdocker.io                          #
+###############################################################################
+version: "3.1"
+services:
+
+    redis:
+      image: redis:alpine
+      container_name: portal-ng-redis
+
+    webserver:
+      image: nginx:alpine
+      container_name: portal-ng-webserver
+      working_dir: /application
+      volumes:
+          - .:/application
+          - ./phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      ports:
+       - "80:80"
+
+    php-fpm:
+      build: phpdocker/php-fpm
+      container_name: portal-ng-php-fpm
+      working_dir: /application
+      volumes:
+        - .:/application
+        - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
+

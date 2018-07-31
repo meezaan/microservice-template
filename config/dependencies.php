@@ -1,13 +1,11 @@
 <?php
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
-use Doctrine\ORM\Tools\Setup;
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\Yaml\Yaml;
 
 $container = $app->getContainer();
 
-$container['config'] = function($c) {
+$container['config'] = function() {
     $environment = in_array(getenv('PROVISION_CONTEXT'), ['development', 'production', 'staging']) ? getenv('PROVISION_CONTEXT') : 'development';
     return Yaml::parse(file_get_contents(realpath(__DIR__) . '/config.' . $environment . '.yml'));
 };
@@ -19,27 +17,6 @@ $container['helper'] = function($c) {
     $helper->logger->pushHandler(new StreamHandler(realpath(realpath(__DIR__) . '/../logs') . '/microservice.log', Logger::WARNING));
 $helper->config= $config;
     return $helper;
-};
-
-$container['doctrine'] = function($c) {
-    $config = $c->config; 
-    $doctrine = new \stdClass();
-    $paths = array(realpath(__DIR__) . '/../src');
-    $isDevMode = $config['connections']['database']['doctrine']['mode'] == 'dev' ? true : false;
-    $docConfig = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
-    $docParams = [
-        'driver' => $config['connections']['database']['doctrine']['driver'],
-        'user' => $config['connections']['database']['doctrine']['username'],
-        'password' => $config['connections']['database']['doctrine']['password'],
-        'dbname' => $config['connections']['database']['doctrine']['dbname'],
-        'host' => $config['connections']['database']['doctrine']['host'],
-        'port' => $config['connections']['database']['doctrine']['port']
-    ];
-
-    $doctrine->entityManager = EntityManager::create($docParams, $docConfig);
-    
-    return $doctrine;
-
 };
 
 $container['notFoundHandler'] = function ($c) {
@@ -74,3 +51,33 @@ $container['notFoundHandler'] = function ($c) {
             ->write($resp);
     };
 };*/
+
+// Register Twig component on container
+$container['view_twig'] = function($container) {
+    $view = new \Slim\Views\Twig(realpath(__DIR__) . '/../src/views', [
+//        'cache' => '/cache',
+        'cache' => false,
+    ]);
+
+    $basePath = rtrim(str_ireplace(
+        'index.php',
+        '',
+        $container->get('request')->getUri()->getBasePath()
+    ), '/');
+
+    $view->addExtension(new \Slim\Views\TwigExtension($container->get('router'), $basePath));
+
+    return $view;
+};
+
+// Register PHP view component
+$container['view_php'] = function($container) {
+    return new \Slim\Views\PhpRenderer(realpath(__DIR__) . '/../src/views/');
+};
+
+// Use selected template engine
+if ('twig' === $container['config']['slim']['settings']['template_engine']) {
+    $container['view'] = $container['view_twig'];
+} else {
+    $container['view'] = $container['view_php'];
+}

@@ -9,6 +9,7 @@ require_once realpath(__DIR__) . '/../config/dependencies.php';
 /** Load routes **/
 $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(realpath(__DIR__) . '/../routes'));
 $routes = array_keys(array_filter(iterator_to_array($iterator), function($file) {
+    /** @var DirectoryIterator $file */
     return $file->isFile();
 }));
 

@@ -1,0 +1,203 @@
+<?php
+/**
+ * Master layout
+ *
+ * @author Ian.H <ian@giffgaff.co.uk>
+ */
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <?php
+    // Favicon
+    $this->headLink(array('rel' => 'favicon', 'href' => '/favicon.ico'));
+    $this->headLink(array('rel' => 'apple-touch-icon', 'href' => '/gfx/icons/iphone-icon.png'));
+
+    // Add the meta data
+    $this->headMeta()->setCharset('utf-8');
+    $this->headMeta()->appendName("format-detection", "telephone=no");
+    $this->headMeta()->appendName("theme-color", $this->themeColour);
+    $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1');
+
+    echo $this->headMeta();
+
+    //Title
+    echo $this->headTitle();
+    ?>
+    <link href='//fonts.googleapis.com/css?family=Lato:400normal,900normal&subset=all' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Gochi+Hand" rel="stylesheet" type='text/css'>
+    <?php
+    if ($detect->displayPhone()) {
+        $this->headLink()->prependStylesheet($this->asset()->css($this->cssBundle));
+        $this->dataLayer()->add("responsive", 1);
+    } else {
+        $this->headLink()->prependStylesheet($this->asset()->css($this->cssBundle));
+        $this->dataLayer()->add("responsive", 0);
+    }
+
+    ?>
+
+    <?php if($this->layout()->iphoneAppId):?>
+        <meta name="apple-itunes-app" content="app-id=<?php echo $this->layout()->iphoneAppId ?>"/>
+    <?php  endif; ?>
+
+    <?= $this->headLink();?>
+    <?= $this->headStyle();?>
+
+    <?php echo $this->placeholder('inline-style'); ?>
+    <?php if (!empty($this->inlineStyle)) {echo $this->inlineStyle;} ?>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <?php if (!$detect->displayPhone()): //Google Plus ?>
+        <link href="//plus.google.com/101822437399736576163" rel="publisher" />
+    <?php endif; ?>
+
+    <?=$this->layout()->headScript?>
+    <?=$this->render('_google_analytics.phtml');?>
+    <?=$this->dataLayer();?>
+    <?php $this->render('appdynamics.phtml') ?>
+    <script type="text/javascript">
+        var gg = {};
+        gg.controllers = {};
+        gg.widgets = {};
+        gg.responsiveMode = <?=$this->responsiveMode;?>
+    </script>
+
+    <?php if (App::config()->flags->enable_inbenta_support_page) :?>
+        <script src="<?= App::config()->search_modal_widget_path ?>"></script>
+    <?php endif;?>
+</head>
+<body  class="<?=$this->cssClass()->getClassesString('body');?>">
+<?=$this->render('_google_tag_manager.phtml');?>
+<a href="#content" class="sr-only">Skip to content</a>
+<div id="wrapper" class="wrapper <?=$this->cssClass()->getClassesString('wrapper');?>">
+    <?php if(!$detect->displayApp()):?>
+        <nav id="top-nav"  class="navbar <?= $this->layout()->navStaticTop?'navbar-scroll-top':''?>  navbar-fixed-top" role="navigation">
+            <?php if ($this->isBlackFridayPromoOn):?>
+                <div class="alert alert-notification gold">
+                    <a class="goto plain"
+                       href="<?=t('blackfriday_landing_link');?>">
+                        <?=t('blackfriday_alert_link_label');?>
+                    </a>
+                    <a href="#" data-dismiss="alert" class="close">×</a>
+                </div>
+            <?php endif;?>
+
+            <div class="navbar-inner">
+                <div class="container">
+                    <a id="logo" class="brand" href="/">giffgaff homepage</a>
+
+                    <?php echo $this->placeholder('navigation-steps'); ?>
+
+                    <?php if ($this->layout()->showNavigation):?>
+                        <a id="link_menu_open_close" class="btn btn-navbar collapsed visible-phone hidden-desktop hidden-tablet" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <?php if (App::config()->flags->enable_inbenta_support_page) :?>
+                            <span class="nav__inbenta-toggler nav__inbenta-toggler--small btn-navbar visible-phone hidden-desktop hidden-tablet"></span>
+                        <?php endif;?>
+                        <?php if($detect->displayPhone()):?>
+                            <a id="icon-member-dashboard" class="pull-right icon-member-container  visible-phone hidden-desktop hidden-tablet" href="/dashboard">
+                                <?php if(App::isUserLoggedIn()):?>
+                                    <img class="member-profile" width="33" heigth="33" src="<?php echo $this->TopNavMenu()->setProfileImage()?>">
+                                <?php else:?>
+                                    <i class="icon-35x35-my-giffgaff_active"></i>
+                                <?php endif;?>
+                            </a>
+                        <?php endif;?>
+                        <?php echo $this->partial('topnav.phtml', $this) ?>
+                        <div class="nav-collapse collapse visible-phone">
+                            <?php echo $this->partial('topnav.mobile.phtml', array(
+                                'navigationBanner' => $this->navigationBanner,
+                            )) ?>
+                        </div>
+                    <?php else: //echo $this->placeholder('replace-navigation'); ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </nav>
+        <?php if ($this->notifications && $this->layout()->showNavigation):
+            $this->partialLoop()->setObjectKey('notification');
+            echo $this->partialLoop('_notification.phtml', $this->notifications);
+        endif; ?>
+    <?php endif ?>
+
+    <div id="content" class="content <?=$this->cssClass()->getClassesString('content') ?>">
+        <!-- Show only messages on top only if no section specific messages  --->
+        <?php if (!$this->showSectionSpecificFlashMessages): ?>
+            <?= $this->render('styleguide-messenger.phtml'); ?>
+        <?php endif; ?>
+        <?php
+        // The main view is rendered in here
+        echo $this->layout()->content;
+        ?>
+    </div>
+
+    <?php if(!$detect->displayApp()): ?>
+        <?=$this->render('footer.phtml');?>
+    <?php endif ?>
+</div>
+
+
+<?php  echo $this->placeholder('gg_alert_messages'); ?>
+
+<!-- JS Placed at the end of the document so the pages load faster -->
+<?php
+$this->headScript()->prependFile($this->asset()->js($this->jsBundle));
+$this->headScript()->prependFile($this->asset()->js('vendor/jquery.min'));
+//Adding the below script to fix giffgaff.com being shown as Giffgaff.com on search Engines
+$this->headScript()->appendScript('{ "@context" : "http://schema.org", "@type" : "WebSite", "name" : "giffgaff", "alternateName" : "giffgaff", "url" : "'.'https://giffgaff.com'.($this->url() == '/' ? '':$this->url()) . '"}',"application/ld+json",null);
+echo $this->headScript();
+?>
+<?php if(App::config()->flags->firstLoginMessage && App::user()):?>
+    <?php $firstLogin = App::usersService()->getFirstLogin();?>
+    <?php if($firstLogin == "false"): ?>
+        <div id="modalFirstLogin" class="modal fade hide" tabindex="-1" role="dialog" aria-labelledby="modalFirstLoginLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="modalFirstLoginLabel"><?php echo th('LOGIN_MESSAGE_title'); ?></h3>
+            </div>
+            <div class="modal-body">
+                <?= t('LOGIN_MESSAGE_text');?>
+            </div>
+        </div>
+    <?php endif;?>
+<?php endif;?>
+
+<?php echo $this->partial('modalbox/privacy-policy-modal.phtml') ?>
+
+
+<?php echo $this->inlineScript(); ?>
+
+<?php // CMS & Copy management
+if(!$detect->displayPhone() && App::user() && App::user()->isManager() && getenv('GG_CMS')){
+    echo $this->partial('admin-cms/_menu.phtml');
+}
+elseif(!$detect->displayPhone() && App::config()->flags->copy){
+    echo $this->partial('_copy.phtml');
+}
+?>
+<?php echo $this->render('_widgets/modal_eu_euro_zone_countries.phtml',$this) ?>
+<?php echo $this->iovation()->renderBlackbox(); ?>
+<!-- Page generated <?=$this->currentServer;?>-->
+<!-- Campaign <?= $this->escape(App::session('campaign')->utm_campaign) ?> -->
+<?php if (App::config()->flags->enable_inbenta_support_page) :?>
+    <script>
+        if (window['ggInbentaSearch']) {
+            window['ggInbentaSearch'].injectTogglers([{
+                selector: '.nav__inbenta-toggler',
+                options: {
+                    hoverTransition: false
+                }
+            }]);
+        }
+    </script>
+<?php endif;?>
+</body>
+</html>

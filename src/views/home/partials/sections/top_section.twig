@@ -1,0 +1,53 @@
+{% if user.fullyAuthenticated %}
+    <div id="section1" class="section section1 sim-user-section">
+        <div class="body">
+            <h1 class="heading-v2">###('HOMEPAGE_home_header_h2_logged_in')###</h1>
+            <i class="uswitch-logo-white hidden-phone"></i>
+        </div>
+    </div>
+    <div id="section2" class="section section2 cream-pattern center">
+        <div class="body">
+            <p class="big welcome-text">
+                ###('HOMEPAGE_home_header_text_logged_in')###
+            </p>
+            <div class="section-ctas">
+                {% if user.hasActiveSim %}
+                    <a id="order-more-sims-button" class="btn btn-x-large btn-primary center" href="/spread">
+                        ###('PAGE_INDEX_order_mgm_sims_logged_in')###
+                    </a>
+                    <a id="friend-sims-button" class="btn btn-x-large btn-secondary center"
+                       href="###('PAGE_INDEX_add_topup_link')###">###('PAGE_INDEX_add_topup')###</a>
+                {% else %}
+                    <a id="activate-sim-button" class="btn btn-x-large btn-secondary"
+                       href="/activate">###('PAGE_INDEX_activate_sim')###</a>
+                {% endif %}
+                <i class="uswitch-logo-blue hidden-desktop center"></i>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div id="section1" class="section section1 ">
+        <div class="body">
+            <h1 class="heading-v2">Come join us</h1>
+            <i class="uswitch-logo-white hidden-phone"></i>
+        </div>
+    </div>
+    <div id="section2" class="section section2 cream-pattern center">
+        <div class="body">
+                    <span class="big">
+                        No contract means you can stay because you want to.
+                     </span>
+            <span class="discover-more-link">
+                    <a id="discover-about-us" class="goto center"
+                       href="/about-us">Discover more</a>
+                    </span>
+            <div class="section-ctas">
+                <a id="order-sim-button" class="btn btn-x-large btn-primary"
+                   href="/free-sim-cards">Order your free SIM</a>
+                <a id="activate-sim-button" class="btn btn-x-large btn-secondary"
+                   href="/activate">Activate your SIM</a>
+            </div>
+            <i class="uswitch-logo-blue  hidden-desktop center"></i>
+        </div>
+    </div>
+{% endif %}
