@@ -29,7 +29,7 @@
         </div>
     {% endif %}
 
-    {% if flags.dashboard_light %}
+    {% if not flags.dashboard_light %}
         <div id="goodybags-section" class="section cream-pattern goodybags-section">
             <div class="body">
                 {% include '/home/partials/sections/hero_goodybag.twig' %}
@@ -37,5 +37,13 @@
         </div>
     {% endif %}
 
+    <div id="sellformore-section" class="section section-sell-for-more top-bottom-noise">
+        {% include '/home/partials/sections/sell_for_more.twig' %}
+    </div>
 
+    <div id="phones-section" class="section light-gray">
+        <div class="body">
+            {% include '/home/partials/sections/phones.twig' %}
+        </div>
+    </div>
 {% endblock %}

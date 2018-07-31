@@ -9,6 +9,9 @@
             <img src="/styleguide/images/noise-goodybag/{{ heroGoodybag.sku }}.svg"
                  alt="(/homepage/goodybags/goodybag/alt/text_{{ heroGoodybag.sku }})"
                  width="180" height="180"></a>
+        <b class="allowances-container big">
+            {% include '/home/partials/goodybags/always_on_bullets.twig' %}
+        </b>
         {#<b class ="allowances-container big"><?php echo $this->goodybag($this->heroGoodybag)->getHeroBundleBulletDetails() ?></b>#}
     </div>
     <div class="span6 order-container">

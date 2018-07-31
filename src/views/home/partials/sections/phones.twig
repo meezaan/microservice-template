@@ -1,0 +1,135 @@
+<div class="big visible-phone">
+    <h2>Phones</h2>
+    <p>
+        We're changing the way<br>
+        <strong>to buy a new phone</strong>:
+        <br><br><br>
+        <i class="svg-icon-35x35 svg-home-page home-src-svg-phones-phones_find pull-left"></i>
+        <span class="clearfix"><strong>Find the phone you want</strong><br>
+            with helpful, straight talking member reviews
+        </span><br>
+        <i class="svg-icon-35x35 svg-home-page home-src-svg-phones-phones_goodybag pull-left"></i>
+        <span class="clearfix"><strong>Pick how you want to pay</strong><br>
+            upfront &amp; every month
+        </span><br>
+        <i class="svg-icon-35x35 svg-home-page home-src-svg-phones-phones_pay pull-left"></i>
+        <span class="clearfix"><strong>Pick a goodybag</strong><br>
+            find your favourite or switch it up each month
+        </span><br/>
+        {% if phoneVouchers %}
+            <i class="icon-35x35-accessories_black pull-left"></i>
+            <span class="clearfix"><strong>Free phone accessories</strong><br>
+                with every phone
+            </span><br/>
+        {% endif %}
+    <hr/>
+</div>
+<div class="row-fluid hero-phones">
+    <div class="span8">
+        <div class="row-fluid handsets-list handsets-list-top">
+            {% for key, phoneIter in phoneDetails %}
+                <div class="span4 item clearfix">
+                    <h3 class="{{ key is same as(1) ? 'bigger' : 'smaller'}} hidden-phone">
+                        <a
+                                href="/mobile-phones/{{ phoneIter.make }}/{{ phoneIter.model }}/phone-details"
+                                title="View details">{{ phoneIter.title }}</a>
+                    </h3>
+                    <div class="header">
+                        {% if promo.blackFriday.enabled or promo.xmas.enabled %}
+                            <div class="black-friday-hero-discount-sticker center hidden-phone">
+                                {{ phoneIter.discount }}
+                            </div>
+                        {% endif %}
+                        <div class="pic{{ promo.blackFriday.enabled or promo.xmas.enabled ? 'hero-shine-bg' }}">
+                            <a
+                                    href="/mobile-phones/{{ phoneIter.make }}/{{ phoneIter.model }}/phone-details"
+                                    title="View details"
+                                    class="handset-image"><img class="lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                        data-src="https://static.giffgaff.com/images/phones/products/{{ phoneIter.model }}/{{ phoneIter.color }}/slider_190x375/1.png"
+                                     {#data-src="<?= $this->phoneImage()->getProductImagePath('slider_190x375/1', $phoneIter->model, $phoneIter->color) ?>"#}
+                                     alt="{{ phoneIter.title }} image"></a>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <div class="hero-phones-mobile-container">
+                            <h3 class="visible-phone">
+                                <a href="/mobile-phones/{{ phoneIter.make }}/{{ phoneIter.model }}/phone-details"
+                                   title="View details">{{ phoneIter.mobile_title }}{{ phoneIter.title }}</a>
+                            </h3>
+
+                            {% if promo.blackFriday.enabled or promo.xmas.enabled %}
+                                <div class="black-friday-hero-discount-sticker center visible-phone">
+                                    {{ phoneIter.discount }}
+                                </div>
+                            {% endif %}
+
+                            <div class="price">
+                                {% if phoneIter.old_price %}
+                                    <strong>was <span>{{ phoneIter.old_price }}</span></strong>
+                                {% else %}
+                                    <br>
+                                {% endif %}
+
+                                <div>
+                                    <a
+                                            class="{% if flags.home.hero_phone_monthly_price %}goto{% endif %} biggest unstyled" href="/mobile-phones/{{ phoneIter.make }}/{{ phoneIter.model }}/phone-plans?payment=1">
+                                        <strong>£{{ phoneIter.price }}</strong>
+                                        {% if flags.home.hero_phone_monthly_price %}
+                                            <span class="normal">per month</span>
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                            <a
+                                    class="btn btn-mini btn-secondary"
+                                    href="/mobile-phones/{{ phoneIter.make }}/{{ phoneIter.model }}/phone-details">
+                                View details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div id="get-a-handset" class="span4 big hidden-phone">
+        <h2>Phones</h2>
+        <p>
+            We're changing the way<br>
+            <strong>to buy a new phone</strong>:
+            <br><br><br>
+            <i class="svg-icon-35x35 svg-home-page home-src-svg-phones-phones_find pull-left"></i>
+            <span class="clearfix"><strong>Find the phone you want</strong><br>
+                with helpful, straight talking member reviews
+            </span><br>
+            <i class="svg-icon-35x35 svg-home-page home-src-svg-phones-phones_goodybag pull-left"></i>
+            <span class="clearfix"><strong>Pick how you want to pay</strong><br>
+                upfront &amp; every month
+            </span><br>
+            <i class="svg-icon-35x35 svg-home-page home-src-svg-phones-phones_pay pull-left"></i>
+            <span class="clearfix"><strong>Pick a goodybag</strong><br>
+                find your favourite or switch it up each month
+            </span><br/>
+
+            {% if phoneVouchers %}
+                <i class="icon-35x35-accessories_black pull-left"></i>
+                <span class="clearfix">
+                    <strong>Free phone accessories</strong><br>
+                    with every phone
+                </span><br>
+            {% endif %}
+        </p>
+        <a title="Phones" class="btn btn-large btn-primary" href="/mobile-phones">
+            <i class="icon-24x24-phones"></i>
+            <span class="title"><strong>See all phones</strong></span>
+        </a>
+    </div>
+</div>
+<div class="clearfix visible-phone center mb-40">
+    <a title="Phones" class="btn btn-large btn-primary" href="/mobile-phones">
+        <i class="icon-24x24-phones"></i>
+        <span class="title"><strong>See all phones</strong></span>
+    </a>
+</div>
+<div class="clearfix">
+    <small>{{ phonesPricesSmallPrint }}</small>
+</div>

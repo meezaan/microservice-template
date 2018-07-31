@@ -13,5 +13,6 @@ app:
   flags:
     enable_inbenta_support_page: true
     money_banner: true
-    dashboard_light: true
-
+    dashboard_light: false
+    home:
+      hero_phone_monthly_price: true

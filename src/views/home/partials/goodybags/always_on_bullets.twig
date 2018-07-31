@@ -1,0 +1,24 @@
+{# Always on goodybag bullet list #}
+{% if not bundle.hasMinutes and not bundle.hasTexts %}
+    <ul class="bundle-allowances hero unstyled">
+        <li class="data">
+            <i class="icon-30x30-bullet-{{ bundle.name }}"></i>
+            {{ bundle.data|capitalize }} data
+        </li>
+    </ul>
+{% else %}
+    <ul class="bundle-allowances hero unstyled">
+        <li class="data">
+            <i class="icon-30x30-bullet-{{ bundle.name }}"></i>
+            {{ bundle.data|capitalize }} data
+        </li>
+        <li class="minutes">
+            <i class="icon-30x30-bullet-{{ bundle.name }}"></i>
+            {{ bundle.minutes|capitalize }} mins
+        </li>
+        <li class="texts">
+            <i class="icon-30x30-bullet-{{ bundle.name }}"></i>
+            {{ bundle.texts|capitalize }} texts
+        </li>
+    </ul>
+{% endif %}
